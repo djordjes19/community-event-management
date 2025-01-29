@@ -1,4 +1,4 @@
-# community-event-management
+
 
 # Community Event Management System
 
@@ -16,7 +16,4 @@ A microservices-based system for managing events, user roles, real-time messagin
 - MySQL, Hibernate/JPA
 - REST APIs, JWT, Resilience4j
 
-## Setup
-```bash
-git clone https://github.com/<username>/Community-Event-Management.git
-# Add steps to run each microservice
+

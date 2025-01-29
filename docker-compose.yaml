@@ -1,0 +1,52 @@
+services:
+  eureka-server:
+    image: cem/eureka-server:0.1
+    ports:
+      - "8761:8761"
+
+  user-management:
+    image: cem/user-management:0.1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+
+
+
+  event-management:
+    image: cem/event-management:0.1
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+      - user-management
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+  #    networks:
+  #      - cem
+
+  feedback-messaging-service:
+    image: cem/feedback-messaging-service:0.1
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+      - user-management
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+
+  api-gateway:
+    image: cem/api-gateway:0.1
+    ports:
+      - "8765:8765"
+    depends_on:
+      - eureka-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+#    networks:
+#      - cem
+
+#networks:
+#  cem:
